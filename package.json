@@ -4,6 +4,7 @@
   "description": "this is for my final project",
   "main": "index.js",
   "scripts": {
+    "start": "node src/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-prod": "webpack --config webpack.prod.js",
     "build-dev": "webpack-dev-server  --config webpack.dev.js --open"
