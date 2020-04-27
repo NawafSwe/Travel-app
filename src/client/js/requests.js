@@ -1,10 +1,8 @@
 const geonamesUrl = 'http://api.geonames.org/';
 const geonamesKey = '&username=nawaf_softwareeng&style=full';
 const geonamesQuery = 'searchJSON?formatted=true&q=';
-
 const weatherbit_URL = 'http://api.weatherbit.io/v2.0/forecast/daily?';
 const weatherbit_KEY = '&key=73a527111c75473fb02b45942d556398';
-const weatherbit_Query = '&lat=&lon='
 const pixabayURL = 'https://pixabay.com/api/?key=';
 const pixabayKey = '';
 
@@ -65,7 +63,6 @@ async function getWeather(latitude, longitude) {
         });
 
         if (response.ok) {
-
             let data = await response.json()
             return data;
 
@@ -76,3 +73,5 @@ async function getWeather(latitude, longitude) {
 
 
 }
+
+export {getGeoLocation, getImage, getWeather};
