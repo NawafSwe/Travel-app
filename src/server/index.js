@@ -6,6 +6,9 @@ let projectData = {}
 const dotenv = require('dotenv');
 dotenv.config();
 
+const async = require('express-async-errors')
+const fetch = require('node-fetch')
+
 
 const express = require('express')
 const cors = require('cors')
@@ -32,3 +35,20 @@ app.listen(port, function () {
 
 
 })
+
+app.post('/forecast', async (req, res, next) => {
+    if (req.body.endpoint !== " ") {
+        const endpoint = req.body.endpoint;
+        try {
+            const response = await fetch(endpoint);
+            if (response.ok) {
+                const jsonRes = await response.json();
+                res.status(201).send(jsonRes);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    } else {
+        res.status(400).json('Bad Request');
+    }
+});
