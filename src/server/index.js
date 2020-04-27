@@ -20,6 +20,8 @@ app.use(express.static('dist'))
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json())
 
+// we cannot export the app which is the main backbone of our server
+
 
 app.get('/', function (req, res) {
     // res.sendFile('dist/index.html')
@@ -62,5 +64,8 @@ app.get('/all', (req, res) => {
     res.send(projectData);
 })
 
-export {app}
+
+
+
+
 

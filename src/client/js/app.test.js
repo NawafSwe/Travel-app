@@ -1,4 +1,4 @@
-import {getting_info} from "../client";
+import {getting_info} from "./app";
 import "babel-polyfill"
 
 describe('Test, the function getting_info() should exist', () => {
