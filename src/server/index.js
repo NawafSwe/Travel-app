@@ -42,8 +42,10 @@ app.post('/forecast', async (req, res, next) => {
         try {
             const response = await fetch(endpoint);
             if (response.ok) {
-                const jsonRes = await response.json();
-                res.status(201).send(jsonRes);
+                const data = await response.json();
+                projectData = data;
+                console.log(projectData);
+                res.status(201).send(data);
             }
         } catch (error) {
             console.log(error);
@@ -52,3 +54,8 @@ app.post('/forecast', async (req, res, next) => {
         res.status(400).json('Bad Request');
     }
 });
+
+app.get('/all', (req, res) => {
+    res.send(projectData);
+})
+

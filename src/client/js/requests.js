@@ -1,10 +1,13 @@
+import {updateUI} from "./Update_UI";
+
 const geonamesUrl = 'http://api.geonames.org/';
 const geonamesKey = '&username=nawaf_softwareeng&style=full';
 const geonamesQuery = 'searchJSON?formatted=true&q=';
 const weatherbit_URL = 'http://api.weatherbit.io/v2.0/forecast/daily?';
 const weatherbit_KEY = '&key=73a527111c75473fb02b45942d556398';
 const pixabayURL = 'https://pixabay.com/api/?key=';
-const pixabayKey = '';
+const pixabayKey = '16251137-27650fa124ea2671f83a2fa99';
+
 
 async function getGeoLocation(location) {
 
@@ -16,6 +19,7 @@ async function getGeoLocation(location) {
             location.latitude = data.geonames[0].lat;
             location.longitude = data.geonames[0].lng;
             location.countryCode = data.geonames[0].countryCode;
+            updateUI()
             return location;
         }
 
@@ -34,17 +38,17 @@ async function getImage(city_name, country) {
     try {
         let response = await fetch(cityEndpoint)
         if (response.ok) {
-            let data = response.json();
+            let data = await response.json();
             if (data.totalHits === 0) {
                 // If not, display pictures for the country
                 response = await fetch(countryEndpoint);
                 if (response.ok) {
                     data = await response.json();
+                    console.log(data)
                     return data.hits[0].largeImageURL;
                 }
             }
-
-
+            console.log(data)
             return data.hits[0].largeImageURL;
         }
     } catch (e) {
@@ -64,6 +68,7 @@ async function getWeather(latitude, longitude) {
 
         if (response.ok) {
             let data = await response.json()
+            console.log(data)
             return data;
 
         }

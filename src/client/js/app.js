@@ -1,9 +1,13 @@
 import {getGeoLocation, getImage, getWeather} from './requests'
+import {updateUI} from "./Update_UI";
 /* Global Variables */
 // Create a new date instance dynamically with JS
 //"http://api.openweathermap.org/data/2.5/weather?units=imperial&zip=20001&APPID="
 let d = new Date();
 let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
+//way of checking the select
+/*let e = document.getElementById("ddlViewBy");
+let strUser = e.options[e.selectedIndex].text;*/
 
 
 // Event listener to add function to existing HTML DOM element
@@ -16,27 +20,28 @@ let city_name = document.querySelector('#city_name');
 
 
 // Function called by event listener
-const getting_info = async (e) => {
+export const getting_info = async (e) => {
     e.preventDefault();
-    const location = await getGeoLocation(city_name)
+    const location = await getGeoLocation(city_name.value)
     const weather = await getWeather(location.latitude, location.longitude)
-    const url = getImage(city_name,)
+    const url = await getImage(city_name.value, location.countryCode)
+    const up = await updateUI()
+    console.log(up)
 
 
 }
 search_button.addEventListener('click', getting_info);
 
 
-//updating UI method
-const updateUI = async () => {
-    const request = await fetch(window.location.origin + '/all');
-    try {
-        const response = await request.json();
-        date_entry.innerHTML = response[0].date;
-        temp_entry.innerHTML = response[0].temp;
-        content_entry.innerHTML = response[0].zip + ' ' + response[0].feelings;
-    } catch (e) {
-        console.log('error', e);
-    }
-};
+function checkDate(day, month, year) {
+    // checking if the user is out of seven days
+    return !((day - d.getDate()) > 7 || (month > d.getMonth() || year > d.getFullYear()));
+}
+
+
+
+
+
+
+
 
