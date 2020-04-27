@@ -10,12 +10,33 @@
 #section_city {
   grid-area: ci;
 }
+
 #section_date {
   grid-area: dt;
 }
+
 #section_submit {
   grid-area: su;
+
 }
+
 #submit_button {
-  background-color: blanchedalmond;
+  background-color: olivedrab;
+  padding: 0;
+  border: 0;
+
+
 }
+
+#submit_button:hover {
+  background-color: moccasin;
+}
+
+.save_trip:hover {
+  background-color: darkgrey;
+}
+
+.delete_trip:hover {
+  background-color: darkgrey;
+}
+

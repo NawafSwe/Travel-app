@@ -19,7 +19,7 @@ async function getGeoLocation(location) {
             location.latitude = data.geonames[0].lat;
             location.longitude = data.geonames[0].lng;
             location.countryCode = data.geonames[0].countryCode;
-            updateUI()
+
             return location;
         }
 
@@ -45,25 +45,28 @@ async function getImage(city_name, country) {
                 if (response.ok) {
                     data = await response.json();
                     console.log(data)
-                    return data.hits[0].largeImageURL;
+                    return data.hits[0].webformatURL;
                 }
             }
             console.log(data)
-            return data.hits[0].largeImageURL;
+            return data.hits[0].webformatURL;
         }
     } catch (e) {
         console.log(e)
     }
 }
 
-//https://api.darksky.net/forecast/[key]/[latitude],[longitude]
+
 async function getWeather(latitude, longitude) {
     const endpoint = `${weatherbit_URL}&lat=${latitude}&lon=${longitude}${weatherbit_KEY}`;
     try {
         const response = await fetch('http://localhost:8081/forecast', {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({endpoint: endpoint})
+            body: JSON.stringify({
+                endpoint: endpoint,
+
+            })
         });
 
         if (response.ok) {

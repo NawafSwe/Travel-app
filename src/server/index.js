@@ -43,7 +43,10 @@ app.post('/forecast', async (req, res, next) => {
             const response = await fetch(endpoint);
             if (response.ok) {
                 const data = await response.json();
-                projectData = data;
+                projectData.city_name = data.city_name;
+                projectData.country_code = data.country_code;
+                projectData.timezone = data.timezone;
+                projectData.temp = data.data[0].temp;
                 console.log(projectData);
                 res.status(201).send(data);
             }
