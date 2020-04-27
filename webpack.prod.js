@@ -3,9 +3,14 @@ const webpack = require('webpack')
 const HtmlWebPackPlugin = require("html-webpack-plugin")
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const MiniCssExtractPlugins = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     entry: './src/client/index.js',
+    optimization: {
+        minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})],
+    },
     mode: 'production',
     devtool: 'source-map',
     stats: 'verbose',
@@ -20,6 +25,8 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: "babel-loader"
             },
+
+
             {
                 test: /\.scss$/,
                 use: [MiniCssExtractPlugins.loader, 'css-loader', 'sass-loader']
