@@ -25,11 +25,13 @@ app.use(bodyParser.json())
 
 app.get('/', function (req, res) {
     // res.sendFile('dist/index.html')
-    res.sendFile(path.resolve('dist/index.html'))
+    reloadPage()
 })
 
-app.get('/test', function (req, res) {
-})
+function reloadPage(req, res) {
+    res.sendFile(path.resolve('dist/index.html'))
+}
+
 // designates what port the app will listen to for incoming requests
 const port = 8081
 app.listen(port, function () {
@@ -63,6 +65,8 @@ app.post('/forecast', async (req, res, next) => {
 app.get('/all', (req, res) => {
     res.send(projectData);
 })
+
+export {reloadPage}
 
 
 
