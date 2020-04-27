@@ -62,3 +62,5 @@ app.get('/all', (req, res) => {
     res.send(projectData);
 })
 
+export {app}
+

@@ -20,7 +20,7 @@ let city_name = document.querySelector('#city_name');
 
 
 // Function called by event listener
-export const getting_info = async (e) => {
+const getting_info = async (e) => {
     let day = getDay();
     let month = getMonth();
     let year = getYear();
@@ -65,6 +65,8 @@ function getYear() {
     const year = selectElement.value;
     return year;
 }
+
+export {getting_info}
 
 
 
